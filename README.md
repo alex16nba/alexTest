@@ -2,12 +2,12 @@
 This is an application I'm building for a course on Lynda.com course on data-driven Angular.js Applications with FireBase.
 
 ## To do
-- [] Add Delete button to listview
-- [] Add Edit button to listview
-- [] Add Pick button to listview
-- [] Add Pick Winner Form
-- [] Implement some sort of Authentication
-- [] Update the application style
+- [ ] Add Delete button to listview
+- [ ] Add Edit button to listview
+- [ ] Add Pick button to listview
+- [ ] Add Pick Winner Form
+- [ ] Implement some sort of Authentication
+- [ ] Update the application style
 
 ## Instructions
 
