@@ -2,12 +2,23 @@
 This is an application I'm building for a course on Lynda.com course on data-driven Angular.js Applications with FireBase.
 
 ## To do
+- [ ] Implement some sort of Authentication
+- [ ] Create Attendance List Option
+- [ ] Refactor so things go into attendance List
+- [ ] Lock down contest option
+
 - [ ] Add Delete button to listview
 - [ ] Add Edit button to listview
 - [ ] Add Pick button to listview
+- [ ] Prevent users from check-in if email already there
+
 - [ ] Add Pick Winner Form
-- [ ] Implement some sort of Authentication
+- [ ] Add Winner ListView
 - [ ] Update the application style
+
+### Optional
+- [ ] Add Surveys
+
 
 ## Instructions
 
