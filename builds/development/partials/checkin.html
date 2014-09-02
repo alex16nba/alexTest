@@ -1,0 +1,22 @@
+<section class="main checkin" >
+  <form ng-controller="CheckInController" name="checkinform"
+    ng-submit="submitForm()"
+    ng-submit="submitForm(checkinform.$valid)"
+    novalidate>
+      <h1>Check-in</h1>
+      <p>Fill out this form to check-in</p>
+      <label for="firstname">First Name:</label>
+      <input autofocus id="firstname" ng-model="firstname" name="firstname" placeholder="First Name" ng-required="true">
+      <p class="valfeedback" ng-show="checkinform.firstname.$invalid && checkinform.firstname.$touched">First Name is required.</p>
+
+      <label for="lastname">Last Name:</label>
+      <input id="lastname" ng-model="lastname" name="lastname" type="text" placeholder="Last Name" ng-required="true">
+      <p class="valfeedback" ng-show="checkinform.lastname.$invalid && checkinform.lastname.$touched">Last Name is required.</p>
+
+      <label for="email">E-mail:</label>
+      <input name="email" type="email" ng-model="email" placeholder="E-mail" ng-required="true">
+      <p class="valfeedback" ng-show="checkinform.email.$invalid && checkinform.email.$touched">Must be a valid email</p>
+
+    <button type="submit" class="btn" ng-disabled="checkinform.$invalid">Check-in</button>
+  </form>
+</section>
