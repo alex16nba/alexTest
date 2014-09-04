@@ -5,9 +5,6 @@ appControllers.controller('RegisterController',
     ['$scope', '$firebase', '$location', 'appInfo',
     function($scope, $firebase, $location, appInfo) {
 
-    var ref = new Firebase("https://attendance100.firebaseio.com/users");
-    var users = $firebase(ref);
-
     //once user submits registration form
     $scope.register = function() {
       var myDate = new Date().getTime();
@@ -17,7 +14,7 @@ appControllers.controller('RegisterController',
       .then(function(user) { //if user is successfully created
 
 
-      users.$push({
+      appInfo.users.$push({
         date: myDate,
         firstname: $scope.firstname,
         lastname: $scope.lastname,
