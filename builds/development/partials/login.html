@@ -1,0 +1,28 @@
+<section class="login">
+ <form ng-controller="LogInController" name="loginform"
+    ng-submit="login(loginform.$validity)"
+    novalidate>
+    <div ng-show="loggedin">
+      <h1>Howdy</h1>
+      <p>{{user.email}}</p>
+      <button class="btn btn-default" ng-click="auth.$logout()">Logout</button>
+    </div>
+    <div>
+      <h1>Hey there!{{appInfo}}</h1>
+      <p>Log-in to access the awesomeness.</p>
+
+      <p class="valfeedback" ng-show="loginMessage">{{loginMessage}}</p>
+
+      <label for="email">Email address</label>
+      <input name="email" type="email" id="email" placeholder="Email" autofocus ng-model="email" ng-required="true">
+      <p class="valfeedback" ng-show="loginform.email.$invalid && loginform.email.$touched">Must be a valid email</p>
+
+      <label for="password">Password</label>
+      <input name="password" type="password" id="password" placeholder="Password" ng-model="password" ng-required="true" >
+      <p class="valfeedback" ng-show="loginform.password.$invalid && loginform.password.$touched">password is required</p>
+
+      <button type="submit" class="btn" ng-disabled="loginform.$invalid">Login</button>
+      <p>or <a href="#/register">register</a></p>
+    </div>
+  </form>
+</section>

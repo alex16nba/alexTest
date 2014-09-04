@@ -2,9 +2,10 @@
 This is an application I'm building for a course on Lynda.com course on data-driven Angular.js Applications with FireBase.
 
 ## To do
-- [ ] Implement some sort of Authentication
-- [ ] Create Attendance List Option
-- [ ] Refactor so things go into attendance List
+- [ ] Authentication/Login
+
+- [ ] Create Event
+- [ ] Refactor for event
 - [ ] Lock down contest option
 
 - [ ] Add Delete button to listview
@@ -14,7 +15,7 @@ This is an application I'm building for a course on Lynda.com course on data-dri
 
 - [ ] Add Pick Winner Form
 - [ ] Add Winner ListView
-- [ ] Update the application style
+- [ ] Update the application styles
 
 ### Optional
 - [ ] Add Surveys

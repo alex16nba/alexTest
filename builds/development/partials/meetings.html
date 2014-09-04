@@ -1,0 +1,14 @@
+<section class="meeting" ng-controller="MeetingsController">
+  <form>
+      <h1>Manage Meetings</h1>
+      <p>Add, delete and edit meetings</p>
+      <input ng-model="meetingname" name="meetingname" placeholder="Add a meeting">
+  </form>
+  <ul>
+    <li ng-repeat="meeting in meetings">
+      <input type="checkbox" ng-model="meeting.active">
+      <span>{{meeting.name}}</span>
+      <button type="submit" class="btn">del</button>
+    </li>
+  </ul>
+</section>

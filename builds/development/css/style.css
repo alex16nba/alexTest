@@ -89,7 +89,7 @@ body  {
   *zoom: 1;
 }
 
-form {
+.main {
   background: #FCF4DC;
   width: 50%;
   min-width: 300px;
