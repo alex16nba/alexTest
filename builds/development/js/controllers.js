@@ -2,32 +2,33 @@ var appControllers = angular.module('appControllers', ['ngAnimate', 'firebase'])
 
 // Register a User --------------------------------------------------------
 appControllers.controller('RegisterController', 
-    ['$scope', '$firebase', '$location', 'appInfo',
-    function($scope, $firebase, $location, appInfo) {
+['$scope', '$firebase', '$location', 'appInfo',
+function($scope, $firebase, $location, appInfo) {
 
-    //once user submits registration form
-    $scope.register = function() {
-      var myDate = new Date().getTime();
+  //user submits registration form
+  $scope.register = function() {
+    var myDate = new Date().getTime();
 
-      //create the user through the appInfo factory object
-      appInfo.loginObj.$createUser($scope.email, $scope.password)
-      .then(function(user) { //if user is successfully created
-
-
-      appInfo.users.$push({
+    //create user through appInfo factory object
+    appInfo.loginObj.$createUser($scope.email, $scope.password)
+    .then(function(user) { //if user is successfully created
+      appInfo.users.$push({ //push info to database
+        id: user.id,
         date: myDate,
         firstname: $scope.firstname,
         lastname: $scope.lastname,
-        email: $scope.email
-      }); //postsRef
-
+        email: user.email
+      }).then(function() {
+        console.log('added user to database');
+        console.log(user);
+      }); //push to database
     }, function(error) {
-      $scope.loginMessage = error.message;
+      $scope.errorMessage = error.message;
     }); //user Creation
-  } //Register
+
+  } //User is Registered
+
 }]); // RegisterController
-
-
 
 
 // Login --------------------------------------------------------

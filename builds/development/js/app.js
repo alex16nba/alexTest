@@ -9,7 +9,7 @@ myApp.factory('appInfo', function($firebase, $firebaseSimpleLogin) {
   var ref = new Firebase("https://attendance100.firebaseio.com/");
   var usersref = new Firebase("https://attendance100.firebaseio.com/users");
   myObj.loginObj = $firebaseSimpleLogin(ref);
-  myObj.database = $firebase(ref);
+  myObj.ref = $firebase(ref);
   myObj.users = $firebase(usersref);
 
   return myObj;
