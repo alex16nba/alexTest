@@ -13,7 +13,14 @@ appControllers.controller('RegisterController',
       appInfo.loginObj.$createUser($scope.email, $scope.password)
       .then(function(user) { //if user is successfully created
 
-      appInfo.sync.$push({foo: "bar"});
+
+      appInfo.sync.$push({
+        date: myDate,
+        firstname: $scope.firstname,
+        lastname: $scope.lastname,
+        email: $scope.email
+      }); //postsRef
+
       console.log('pushed record');
 
 
