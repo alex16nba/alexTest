@@ -1,17 +1,22 @@
+"use strict";
+
 var myApp = angular.module('myApp', [
   'ngRoute',
   'appControllers'
-]);
+])
+.constant('FIREBASE_URL', 'https://attendance100.firebaseio.com');
 
 //Make FireBase Credentials Available
-myApp.factory('appInfo', function($firebase, $firebaseSimpleLogin) {
+myApp.factory('appInfo',
+  function($firebase, FIREBASE_URL, $firebaseSimpleLogin) {
   var myObj = {};
-  var ref = new Firebase("https://attendance100.firebaseio.com/");
+  var ref = new Firebase(FIREBASE_URL);
   var usersref = new Firebase("https://attendance100.firebaseio.com/users");
   myObj.loginObj = $firebaseSimpleLogin(ref);
+
+
   myObj.ref = $firebase(ref);
   myObj.users = $firebase(usersref);
-
   return myObj;
 });
 
@@ -19,27 +24,27 @@ myApp.factory('appInfo', function($firebase, $firebaseSimpleLogin) {
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
   when('/register', {
-    templateUrl: 'partials/register.html',
-    controller: 'RegisterController'
+    templateUrl: 'views/register.html',
+    controller: 'AuthController'
   }).
   when('/login', {
-    templateUrl: 'partials/login.html',
+    templateUrl: 'views/login.html',
     controller: 'LogInController'
   }).
   when('/meetings', {
-    templateUrl: 'partials/meetings.html',
+    templateUrl: 'views/meetings.html',
     controller: 'MeetingsController'
   }).
     when('/list', {
-    templateUrl: 'partials/list.html',
+    templateUrl: 'views/list.html',
     controller: 'ListController'
   }).
   when('/edit/:itemId', {
-    templateUrl: 'partials/edit.html',
+    templateUrl: 'views/edit.html',
     controller: 'EditController'
   }).
   when('/checkin', {
-    templateUrl: 'partials/checkin.html',
+    templateUrl: 'views/checkin.html',
     controller: 'CheckInController'
   }).
   otherwise({

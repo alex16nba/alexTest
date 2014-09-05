@@ -19,8 +19,6 @@ function($scope, $firebase, $location, appInfo) {
         lastname: $scope.lastname,
         email: user.email
       }).then(function() {
-        console.log('added user to database');
-        console.log(user);
       }); //push to database
     }, function(error) {
       $scope.errorMessage = error.message;
@@ -33,19 +31,13 @@ function($scope, $firebase, $location, appInfo) {
 
 // Login --------------------------------------------------------
 appControllers.controller('LogInController', ['$scope', 'appInfo', '$location', function($scope, appInfo, $location) {
-    if (appInfo.loginObj.user !== null) {
-      $scope.loggedin= true;
-      $scope.user = appInfo.loginObj.user;
-      console.log(appInfo.loginObj);
-      // $location.path('/meetings');
-    }
 
     $scope.login = function() { //clicked login button
       appInfo.loginObj.$login("password", {
         email: $scope.email,
         password: $scope.password
       }).then(function(user) {
-        //$location.path('/meetings');
+        $location.path('/meetings');
       }, function(error) {
        $scope.loginMessage = error.message;
      });      
@@ -53,7 +45,6 @@ appControllers.controller('LogInController', ['$scope', 'appInfo', '$location', 
 
     $scope.logout = function() { //clicked logout
       appInfo.loginObj.$logout().then(function(user) {
-        console.log('loggingout');
       }, function(error) {
        $scope.loginMessage = error.message;
      });      
@@ -65,15 +56,16 @@ appControllers.controller('LogInController', ['$scope', 'appInfo', '$location', 
 
 // Meetings Checkins
 appControllers.controller('MeetingsController',
-  ['$scope', '$firebase', 'appInfo', function(
-  $scope, $firebase, appInfo) {
-    if (appInfo.loginObj) {
-      var sync = $firebase(appInfo.ref);
+  ['$scope', 'appInfo', function($scope, appInfo) {
 
-      console.log(appInfo.ref);
+    console.log(appInfo.loginObj);
 
+
+    if (appInfo.loginObj.user.email) {
+      console.log("loggedin");
     } else {
-      $location.path('/login');
+      console.log("not loggedin");
+      //$location.path('/login');
     }
   //$scope.users = $firebase(ref).$asArray();
 }]); //MeetingsController

@@ -3,7 +3,7 @@ var gulp = require('gulp'),
   connect = require('gulp-connect');
 
 gulp.task('js', function() {
-  gulp.src('builds/development/js/*.js')
+  gulp.src('builds/development/js/**/*')
     .pipe(connect.reload())
 });
 
@@ -18,10 +18,10 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('builds/development/js/*.js', ['js']);
+  gulp.watch('builds/development/js/**/*', ['js']);
   gulp.watch('builds/development/css/*.css', ['css']);
   gulp.watch(['builds/development/*.html',
-    'builds/development/partials/*.html'], ['html']);
+    'builds/development/views/*.html'], ['html']);
 });
 
 gulp.task('connect', function() {
