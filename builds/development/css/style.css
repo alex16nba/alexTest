@@ -100,8 +100,8 @@ body  {
   -webkit-box-shadow: 0px 0px 4px 0px black;
     box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
   position: relative;
-  top:110px;
-  opacity: .95
+  top: 50px;
+  opacity: .95;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -378,4 +378,41 @@ p.valfeedback {
   width: 40%;
   max-width: 130px;
   border-radius: 20px;
+}
+
+
+
+nav {
+  width: 100%;
+  background: #EFC94C;
+}
+
+
+nav ul {
+  width: 60%;
+  margin: 0 auto;
+}
+
+nav ul li {
+  float: left;
+}
+
+nav ul li a {
+  float: left;
+  padding: 10px 8px;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background: #45B29D;
+  color: #E0E7AB;
+}
+
+li.branding {
+  background: #1E9382;
+  font-size: 1.5em;
+}
+
+li.branding a {
+  color: #A2CFA5;
 }

@@ -1,21 +1,22 @@
 <section class="login">
- <form ng-controller="LogInController" name="loginform"
+ <form
+    name="myform"
     ng-submit="login()"
     novalidate>
-      <h1>Hey there!{{appInfo}}</h1>
+      <h1>Hey there!</h1>
       <p>Log-in to access the awesomeness.</p>
 
       <p class="valfeedback" ng-show="loginMessage">{{loginMessage}}</p>
 
-      <label for="email">Email address</label>
-      <input name="email" type="email" id="email" placeholder="Email" autofocus ng-model="email" ng-required="true">
-      <p class="valfeedback" ng-show="loginform.email.$invalid && loginform.email.$touched">Must be a valid email</p>
+      <input name="email" type="email" placeholder="Email" autofocus
+        ng-model="user.email" ng-required="true">
+      <p class="valfeedback" ng-show="myform.email.$invalid && myform.email.$touched">Must be a valid email</p>
 
-      <label for="password">Password</label>
-      <input name="password" type="password" id="password" placeholder="Password" ng-model="password" ng-required="true" >
-      <p class="valfeedback" ng-show="loginform.password.$invalid && loginform.password.$touched">password is required</p>
+      <input name="password" type="password" placeholder="Password"
+        ng-model="user.password" ng-required="true" >
+      <p class="valfeedback" ng-show="myform.password.$invalid && myform.password.$touched">password is required</p>
 
-      <button type="submit" class="btn" ng-disabled="loginform.$invalid">Login</button>
+      <button type="submit" class="btn" ng-disabled="myform.$invalid">Login</button>
       <p>or <a href="#/register">register</a></p>
   </form>
 </section>

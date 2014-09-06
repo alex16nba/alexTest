@@ -1,5 +1,3 @@
-var appControllers = angular.module('appControllers', ['ngAnimate', 'firebase']);
-
 // Register a User --------------------------------------------------------
 appControllers.controller('RegisterController', 
 ['$scope', '$firebase', '$location', 'appInfo',
@@ -59,7 +57,6 @@ appControllers.controller('MeetingsController',
   ['$scope', 'appInfo', function($scope, appInfo) {
 
     console.log(appInfo.loginObj);
-
 
     if (appInfo.loginObj.user.email) {
       console.log("loggedin");

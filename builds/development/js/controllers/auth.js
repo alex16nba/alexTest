@@ -5,14 +5,29 @@ myApp.controller('AuthController',
     $location.path('/meetings');
   } //SignedIn
 
-  $scope.register = function() {
+  $scope.login = function() {
 
-    console.log($scope.user);
+    Auth.login($scope.user)
+      .then(function(loggedUser) {
+        console.log('loggedin');
+        console.log(loggedUser);
+        //$location.path('/meetings');
+    });
+
+  } //login
+
+  $scope.register = function() {
 
     Auth.register($scope.user)
       .then(function(authUser) {
+        console.log('registered');
         console.log(authUser);
-        $location.path('/meetings');
+        Auth.login($scope.user)
+          .then(function(loggedUser) {
+            console.log('loggedin');
+            console.log(loggedUser);
+            //$location.path('/meetings');
+          });
       });//authuser
   } //register
 
