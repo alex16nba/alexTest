@@ -1,8 +1,6 @@
-<nav class="cf" ng-controller="NavController">
-  <ul>
-    <li class="branding"><a href="/" ng-click="logout()">Check-ins</a></li>
-    <li><a href="meetings">meetings</a></li>
-    <li><a href="/checkins">check-ins</a></li>
-    <li ng-show="Auth"><a href="#" ng-click="logout()">logout</a></li>
-  </ul>
-</nav>
+<ul>
+  <li class="branding"><a href="#/">CheckIt</a></li>
+  <li><a href="#/meetings">Manage meetings</a></li>
+  <li><a href="#/checkins">List checkins</a></li>
+  <li class="login" ng-show="signedIn()">Hello {{ currentUser.firstname }}<a href="#/login" ng-click="logout()">logout</a></li>
+</ul>

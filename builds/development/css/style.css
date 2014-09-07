@@ -223,7 +223,7 @@ label {
 }
 */
 
-p.valfeedback {
+p.error {
   color: #C61C6F;
   font-size: .8em;
   padding-top: 5px;
