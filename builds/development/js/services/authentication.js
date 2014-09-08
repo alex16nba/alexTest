@@ -1,5 +1,5 @@
 myApp.factory('Authentication',
-  function($firebase, $firebaseSimpleLogin, FIREBASE_URL,
+  function($firebase, $firebaseSimpleLogin, $location, FIREBASE_URL,
     $rootScope) {
 
   var firebaseRef = new Firebase(FIREBASE_URL);
@@ -24,11 +24,9 @@ myApp.factory('Authentication',
                 lastname: user.lastname,
                 email: user.email
               }
-            firebaseUsers.$push(userInfo).then(function(ref) {
-              userInfo.uid = ref.name();
-              $rootScope.currentUser = userInfo;
-            });
-        }); //push user
+
+            firebaseUsers.$set(regUser.uid, userInfo);
+        }); //add user
     }, //register
 
     login: function(user) {
@@ -52,6 +50,17 @@ myApp.factory('Authentication',
   $rootScope.signedIn = function() {
     return  myObject.signedIn();
   }
+
+ $rootScope.$on('$firebaseSimpleLogin:login', function (e, authUser) {
+    var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
+    var user = $firebase(ref).$asObject();
+
+    user.$loaded().then(function() {
+    $rootScope.currentUser = user;
+  });
+
+    $location.path('/meetings');
+  });
 
   //push temp object to Authentication factory 
   return myObject;

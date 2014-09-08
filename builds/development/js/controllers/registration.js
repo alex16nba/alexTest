@@ -10,10 +10,6 @@ myApp.controller('RegistrationController',
     });
   } //login
 
-  $scope.$on('$firebaseSimpleLogin:login', function () {
-    $location.path('/meetings');
-  });
-
   $scope.register = function() {
     Authentication.register($scope.user)
       .then(function(authUser) {
