@@ -21,7 +21,17 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<nav class="cf" ng-include="'views/nav.html'" ng-controller="NavController"></nav>
-<div class="main" ng-view></div>
+<header>
+  <nav class="cf" ng-include="'views/nav.html'" ng-controller="NavController"></nav>
+</header>
+
+<div class="page">
+  <div class="userinfo" ng-show="signedIn()">
+    <span class="user">Hi {{ currentUser.firstname }}</span>
+    <a href="#/login" ng-click="logout()">logout</a>
+  </div>  
+  <main ng-view></main>
+</div>
+
 </body>
 </html>

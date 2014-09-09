@@ -5,27 +5,25 @@ myApp.factory('Authentication',
   var firebaseRef = new Firebase(FIREBASE_URL);
   var simpleLogin = $firebaseSimpleLogin(firebaseRef);
 
-  var firebaseUsersRef = new Firebase(FIREBASE_URL + 'users');
-  var firebaseUsers = $firebase(firebaseUsersRef);
-
   //Create temp object
   var myObject = {
 
     register: function(user) {
-      var myDate = new Date().getTime();
 
       return simpleLogin.$createUser(
         user.email, user.password)
         .then(function(regUser) {
-            var userInfo = {
-                date: myDate,
-                md5: regUser.md5_hash,
-                firstname: user.firstname,
-                lastname: user.lastname,
-                email: user.email
-              }
-
-            firebaseUsers.$set(regUser.uid, userInfo);
+          var firebaseUsersRef = new Firebase(FIREBASE_URL + 'users');
+          var firebaseUsers = $firebase(firebaseUsersRef);
+          var userInfo = {
+              date: Firebase.ServerValue.TIMESTAMP,
+              regUser: regUser.uid,
+              md5: regUser.md5_hash,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              email: user.email
+            }
+          firebaseUsers.$set(regUser.uid, userInfo);
         }); //add user
     }, //register
 
@@ -51,15 +49,19 @@ myApp.factory('Authentication',
     return  myObject.signedIn();
   }
 
- $rootScope.$on('$firebaseSimpleLogin:login', function (e, authUser) {
+  $rootScope.$on('$firebaseSimpleLogin:login', function (e, authUser) {
     var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
     var user = $firebase(ref).$asObject();
 
     user.$loaded().then(function() {
-    $rootScope.currentUser = user;
-  });
+      $rootScope.currentUser = user;
+    });
 
     $location.path('/meetings');
+  });
+
+ $rootScope.$on('$firebaseSimpleLogin:logout', function (e, authUser) {
+    $rootScope.currentUser = {};
   });
 
   //push temp object to Authentication factory 

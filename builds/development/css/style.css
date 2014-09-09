@@ -1,8 +1,14 @@
-/* @override 
-  http://planetoftheweb.com/_/css/styles.css */
+/* Import fonts */
 
 @import url("http://fonts.googleapis.com/css?family=Bree+Serif|Merriweather:400,300,700,900|Droid+Sans:400,700");
 
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 /* Reset Styles */
 
 html, body, div, span, applet, object, iframe,
@@ -89,10 +95,11 @@ body  {
   *zoom: 1;
 }
 
-.main {
+main {
   background: #FCF4DC;
-  width: 50%;
-  min-width: 300px;
+  width: 80%;
+  min-width: 310px;
+  max-width: 510px;
   margin: 0 auto;
   border-radius: 20px;
   padding: 10px 20px;
@@ -100,9 +107,16 @@ body  {
   -webkit-box-shadow: 0px 0px 4px 0px black;
     box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
   position: relative;
-  top: 50px;
   opacity: .95;
 }
+
+@media all and (max-width: 400px) {
+  main {
+    width: 100%;
+     border-radius: 0;
+  }
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Bree Serif', serif;
@@ -116,9 +130,13 @@ a {
   font-family: Bree Serif, serif;
 }
 
+header {
+  margin-bottom: 20px;
+}
+
 h1{
   color: #145266;
-  font-size: 2.2rem;
+  font-size: 2rem;
   line-height: 100%;
   margin-bottom: 10px;
 }
@@ -353,59 +371,14 @@ p.error {
   border-bottom:none;
 }
 
-.userinfo {
-  font-size: 1.1em;
-  line-height: 160%;
-  background: #EEE8D5;
-  color: #0F4150;
-  width: 90%;
-  min-width: 320px;
-  max-width: 620px;
-  margin: 0 auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  padding: 20px 30px;
-  border-radius: 10px;
-  z-index: 20;
-}
-
-.userinfo h1{
-  font-size: 1.8em;
-  margin-bottom: 0;
-}
-
-.userinfo img {
-  width: 40%;
-  max-width: 130px;
-  border-radius: 20px;
-}
-
-
-
 nav {
   width: 100%;
   background: #EFC94C;
 }
 
-
-nav ul {
-  width: 60%;
+nav .table {
+  display: table;   /* Allow the centering to work */
   margin: 0 auto;
-}
-
-nav ul li {
-  float: left;
-}
-
-nav ul li a {
-  float: left;
-  padding: 10px 8px;
-  text-decoration: none;
-}
-
-nav ul li a:hover {
-  background: #45B29D;
-  color: #E0E7AB;
 }
 
 li.branding {
@@ -415,4 +388,71 @@ li.branding {
 
 li.branding a {
   color: #A2CFA5;
+  padding: 10px 35px;
+}
+
+nav ul {
+  width: 100%;
+  margin: 0 auto;
+}
+
+nav ul li {
+  float: left;
+  color: #145266;
+  font-family: Bree Serif, serif;
+}
+
+nav ul li.user {
+  background-color: #D24244;
+  color: #EFC94C;
+  font-family: Bree Serif, serif;
+}
+
+nav ul li.user.hello {
+  margin-left: 60px;
+  padding: 10px 15px;
+}
+
+nav ul li a {
+  float: left;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+nav ul li a:hover {
+  background: #45B29D;
+  color: #E0E7AB;
+}
+
+.userinfo {
+  text-align: center;
+  color: #E0E7AB;
+  font-family: Bree Serif, serif;
+  padding-bottom: 5px;
+}
+
+.userinfo a {
+  color: #EFC94C;
+}
+
+.userinfo input {
+    width: auto;
+}
+
+.addmeeting {
+    width:100%;    
+}
+
+.addmeeting .inputwrapper {
+  margin-right:80px;
+}
+
+.addmeeting .inputwrapper input {
+    float: left;
+    width: 100%;
+}
+
+.addmeeting button {
+  width: 60px;
+  margin-left: 20px;
 }

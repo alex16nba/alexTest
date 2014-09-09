@@ -4,8 +4,7 @@ appControllers.controller('RegisterController',
 function($scope, $firebase, $location, appInfo) {
 
   //user submits registration form
-  $scope.register = function() {
-    var myDate = new Date().getTime();
+  $scope.register = function() {var myDate = new Date().getTime();
 
     //create user through appInfo factory object
     appInfo.loginObj.$createUser($scope.email, $scope.password)
