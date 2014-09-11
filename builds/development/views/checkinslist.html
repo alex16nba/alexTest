@@ -1,9 +1,8 @@
 <section class="userpage" ng-scope>
-  <div class="search">
-    <h2>Checked in Users</h2>
-    <label>search: </label>
-    <input ng-model="query" placeholder="Search for users">
-  </div>
+  <h2>Checked in Users</h2>
+  <label>search: </label>
+  <input ng-model="query" placeholder="Search for users">
+
   <ul class="userlist">
     <li class="user" ng-repeat="user in users | filter: query">
       <a href="#/edit/{{user.$id}}">

@@ -1,26 +1,22 @@
 <section class="meetings">
-      <h1>Meetings</h1>
-      <p>Add, delete and edit meetings</p>
-      <form class="formgroup addmeeting cf"
-        name="myform"
-        ng-submit="addMeeting()"
-        novalidate>
-      <div class="inputwrapper">
-        <input name="meetingname" placeholder="Meeting Name" autofocus
-        ng-model="meetingname" ng-required="true">
-        <p class="error validationerror"
-          ng-show="myform.meetingname.$invalid && myform.meetingname.$touched">
-          Meeting must have a name</p>
+  <h1>Meetings</h1>
+  <p>Add, delete and edit meetings</p>
+  <form class="formgroup addmeeting cf"
+    name="myform"
+    ng-submit="addMeeting()"
+    novalidate>
+    <div class="inputwrapper">
+      <input name="meetingname" placeholder="Meeting Name" autofocus
+      ng-model="meetingname" ng-required="true">
+    </div>
+    <button type="submit" class="btn" ng-disabled="myform.$invalid">+</button>
+  </form>
+  <div class="meetings cf" ng-show="checkForMeetings()">
+    <h2>Your meetings</h2>
+    <p>Click the name to view check-ins.</p>
+      <div class="meeting" ng-repeat="(key, meeting) in meetings">
+        <button class="btn" confirmation-needed="Really Delete?" ng-click="deleteMeeting(key)">-</button>
+        <span class="text"><a href="/#/checkins/{{user}}/{{key}}">{{meeting.name}}</a></span>
       </div>
-      <button type="submit" class="btn" ng-disabled="myform.$invalid">+</button>
-
-      </form>
-
-  <h2>Your meetings</h2>
-  <ul>
-    <li ng-repeat="meeting in meetings">
-      <input type="checkbox" ng-model="meeting.active">
-      <span>{{meeting.name}}</span>
-    </li>
-  </ul>
+  </div> <!-- meetingslist -->
 </section>

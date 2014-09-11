@@ -49,20 +49,6 @@ myApp.factory('Authentication',
     return  myObject.signedIn();
   }
 
-  $rootScope.$on('$firebaseSimpleLogin:login', function (e, authUser) {
-    var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
-    var user = $firebase(ref).$asObject();
-
-    user.$loaded().then(function() {
-      $rootScope.currentUser = user;
-    });
-
-    $location.path('/meetings');
-  });
-
- $rootScope.$on('$firebaseSimpleLogin:logout', function (e, authUser) {
-    $rootScope.currentUser = {};
-  });
 
   //push temp object to Authentication factory 
   return myObject;
