@@ -4,17 +4,28 @@ myApp.controller('CheckInsController',
     $scope.whichuser = $routeParams.uId;
 
     var checkinsRef = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins');
-    var checkins = $firebase(checkinsRef);
+    var checkinsList = $firebase(checkinsRef).$asArray();
 
-    $scope.addMeeting = function() {
+    $scope.checkins = checkinsList;
+
+    $scope.addCheckin = function() {
+      var checkinsObj = $firebase(checkinsRef);
+
       var myData = {
         firstname: $scope.user.firstname,
         lastname: $scope.user.lastname,
         email: $scope.user.email,
         date: Firebase.ServerValue.TIMESTAMP
       };
-      checkins.$push(myData).then(function() {
-        $location.path('/checkins/' + $scope.whichmeeting + "/" + $scope.whichuser + "/details" );
+      checkinsObj.$push(myData).then(function() {
+        $location.path('/checkins/' + $scope.whichuser + "/" + $scope.whichmeeting + "/details" );
       });
-    } //addmeeting
-}); //NavController
+    } //addCheckIn
+
+    $scope.deleteCheckin = function(id) {
+      var record = $firebase(checkinsRef);
+      record.$remove(id);
+    } //deleteCheckIn
+
+}); //CheckInsController
+
