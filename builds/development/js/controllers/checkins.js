@@ -3,7 +3,7 @@ myApp.controller('CheckInsController',
     $scope.whichmeeting = $routeParams.mId;
     $scope.whichuser = $routeParams.uId;
     $scope.order = 'lastname';
-    $scope.direction = false;
+    $scope.direction = true;
     $scope.limit = 999;
 
     var checkinsRef = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins');
@@ -65,11 +65,11 @@ myApp.controller('CheckInsController',
       checkinsObj.$push(myData);
     } //showLove
 
-    $scope.deleteAward = function(id) {
-      var ref = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins/' + myItem.$id + '/awards');
+    $scope.deleteAward = function(checkinId, award) {
+      var ref = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins/' + checkinId + '/awards');
       var record = $firebase(ref);
-      record.$remove(id);
-    } //deleteCheckIn
+      record.$remove(award);
+    } //deleteAward
 
 }); //CheckInsController
 

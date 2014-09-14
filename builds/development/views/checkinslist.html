@@ -8,12 +8,13 @@
       <select ng-model="order">
         <option value="firstname">First Name</option>
         <option value="lastname">Last Name</option>
+        <option value="awards">Awards</option>
         <option value="date">Date</option>
       </select>
     </div> <!-- search by formgroup -->
 
     <div class="formgroup cf">
-      <input id="dirascending" type="radio" ng-model="direction" name="direction" checked>
+      <input id="dirascending" type="radio" ng-model="direction" name="direction">
       <label for="dirascending">asc</label>
       
       <input id="dirdescending" type="radio" ng-model="direction" name="direction" value="reverse">
@@ -37,6 +38,7 @@
           <div class="checkin">
             <div class="buttons" ng-show="signedIn()">
               <button class="btn btn-love tooltip" ng-click="showLove(checkin)"><span>Show the love</span></button>
+              <a class="btn btn-email tooltip" ng-href="mailto:{{checkin.email}}"><span>email user</span></a>
               <button class="btn btn-delete tooltip" confirmation-needed="Delete this checkin?" ng-click="deleteCheckin(checkin.$id)"><span>Delete this check-in</span></button>
             </div><!-- buttons -->
             <div class="info">
@@ -53,12 +55,10 @@
                 <button type="submit" class="btn" ng-disabled="myform.$invalid">+</button>
               </form>
 
-              <p ng-show="checkin.awards.length > 0">Dude</p>
-
               <ul class="awardslist cf">
-                <li class="cf" ng-repeat="award in checkin.awards">
+                <li class="cf" ng-repeat="(key, award) in checkin.awards">
                     <div>{{award.name}}
-                      <button class="btn btn-delete tooltip" confirmation-needed="Delete this checkin?" ng-click="deleteAward(checkin.$id, award.$id)"><span>Delete this award</span></button>
+                      <button class="btn btn-delete tooltip" confirmation-needed="Delete this award?" ng-click="deleteAward(checkin.$id, key)"><span>Delete this award</span></button>
                     </div>
                 </li>
               </ul>
