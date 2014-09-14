@@ -31,13 +31,10 @@ myApp.controller('CheckInsController',
 
     $scope.pickWinner = function() {
       var rand = function(){
-        var num = Math.random();
+         var num = Math.random() - 0.5;
         return num;
       };
-      $scope.order = rand;
       $scope.limit = 1;
-
-
     } //pickwinner
 
     $scope.resetCheckins = function() {
