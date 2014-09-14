@@ -32,4 +32,12 @@ myApp.controller('MeetingsController',
     } //addmeeting
 
   }); // users logged in
+
+ $rootScope.$on('$firebaseSimpleLogin:logout', function (e, authUser) {
+    $rootScope.currentUser = {};
+    $location.path('/login');
+  });
+
+
+
 }); //NavController

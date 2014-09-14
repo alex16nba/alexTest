@@ -1,12 +1,11 @@
-<section class="meetings">
-  <h1>Meetings</h1>
-  <p>Add, delete and edit meetings</p>
+<section class="meetings cf">
+  <h1>Add Meetings</h1>
   <form class="formgroup addmeeting cf"
     name="myform"
     ng-submit="addMeeting()"
     novalidate>
     <div class="inputwrapper">
-      <input name="meetingname" placeholder="Meeting Name" autofocus
+      <input type="text" name="meetingname" placeholder="Meeting Name" autofocus
       ng-model="meetingname" ng-required="true">
     </div>
     <button type="submit" class="btn" ng-disabled="myform.$invalid">+</button>
@@ -14,9 +13,12 @@
   <div class="meetings cf" ng-show="checkForMeetings()">
     <h2>Your meetings</h2>
     <p>Click the name to view check-ins.</p>
+
       <div class="meeting" ng-repeat="(key, meeting) in meetings">
-        <button class="btn" confirmation-needed="Really Delete?" ng-click="deleteMeeting(key)">-</button>
-        <span class="text"><a href="/#/checkins/{{user}}/{{key}}">{{meeting.name}}</a></span>
+        <a class="btn btn-list tooltip" ng-href="#/checkins/{{user}}/{{key}}/checkinsList"><span>View list of checked in users</span></a>
+        <a class="btn btn-checkin tooltip" ng-href="#/checkins/{{user}}/{{key}}"><span>Go to check-in URL</span></a>
+        <button class="btn btn-delete tooltip" confirmation-needed="Really Delete?" ng-click="deleteMeeting(key)"><span>Delete this meeting</span></button>
+        <span class="text"><a ng-href="#/checkins/{{user}}/{{key}}/checkinsList">{{meeting.name}}</a></span>
       </div>
   </div> <!-- meetingslist -->
 </section>

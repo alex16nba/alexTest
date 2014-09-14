@@ -1,6 +1,8 @@
 <div class="table">
   <ul>
-    <li class="branding"><a href="#/">CheckIt</a></li>
-    <li><a ng-href="#/meetings">My Meetings</a></li>
+    <li class="branding"><a href="#/">swAArm</a></li>
+    <li ng-show="signedIn()"><a ng-href="#/meetings">My Meetings</a></li>
+    <li ng-hide="signedIn()"><a ng-href="#/login">Login</a></li>
+    <li ng-hide="signedIn()"><a ng-href="#/register">Register</a></li>
   </ul>
 </div>

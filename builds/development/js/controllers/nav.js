@@ -5,7 +5,7 @@ myApp.controller('NavController',
   var simpleLogin = $firebaseSimpleLogin(firebaseRef);
 
   $scope.logout = function() {
-    Authentication.logout()
+    Authentication.logout();
     $location.path('/login');
   } //logout
 
@@ -22,7 +22,7 @@ myApp.controller('NavController',
 
  $rootScope.$on('$firebaseSimpleLogin:logout', function (e, authUser) {
     $rootScope.currentUser = {};
-    $location.path('/login');
+    // $location.path('/login');
   });
 
 

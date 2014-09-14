@@ -3,7 +3,7 @@
     ng-submit="addCheckin()"
     novalidate>
       <h1>Check-in</h1>
-      <p>Fill out this form to check-in</p>
+      <p>Fill out this form to check-in or go <a ng-href="#/checkins/{{user}}/{{key}}">back to meetings</a></p>
 
       <input name="firstname" placeholder="First Name" autofocus 
         ng-model="user.firstname" ng-required="true">
@@ -19,4 +19,6 @@
       <p class="valfeedback" ng-show="myform.email.$invalid && myform.email.$touched">Must be a valid email</p>
 
     <button type="submit" class="btn" ng-disabled="myform.$invalid">Check-in</button>
+
+
   </form>
