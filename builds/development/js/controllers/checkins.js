@@ -31,10 +31,13 @@ myApp.controller('CheckInsController',
 
     $scope.pickWinner = function() {
       var rand = function(){
-        return 0.5 - Math.random();
+        var num = Math.random();
+        return num;
       };
       $scope.order = rand;
       $scope.limit = 1;
+
+
     } //pickwinner
 
     $scope.resetCheckins = function() {
@@ -44,7 +47,6 @@ myApp.controller('CheckInsController',
     } //resetCheckins
 
     $scope.showLove = function(myItem) {
-      console.log(myItem);
       myItem.show =!myItem.show;
       if (myItem.userState=='expanded') {
         myItem.userState=''; 
@@ -53,11 +55,21 @@ myApp.controller('CheckInsController',
       }
     } //showLove
 
-    $scope.giveLove = function(myItem) {
-      console.log(myItem.giftText);
+    $scope.giveLove = function(myItem, myGift) {
+      var ref = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins/' + myItem.$id + '/awards');
+      var checkinsObj = $firebase(ref);
+      var myData = {
+        name: myGift,
+        date: Firebase.ServerValue.TIMESTAMP
+      };
+      checkinsObj.$push(myData);
     } //showLove
 
-
+    $scope.deleteAward = function(id) {
+      var ref = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins/' + myItem.$id + '/awards');
+      var record = $firebase(ref);
+      record.$remove(id);
+    } //deleteCheckIn
 
 }); //CheckInsController
 

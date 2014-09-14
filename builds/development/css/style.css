@@ -358,7 +358,9 @@ p.error {
 .userlist li {
   width: 50%;
   float: left;
-  padding: 5px;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 10px;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
@@ -371,7 +373,7 @@ p.error {
 
 .userlist li.expanded {
   width: 100%;
-  background-color: #EAE28B;
+  background-color: #D3E0E3;
 }
 
 .userlist li.expanded form {
@@ -387,7 +389,6 @@ p.error {
 .userlist li.expanded .btn-love {
   background-color: #C61C6F;
 }
-
 
 .userlist .buttons {
   display: block;
@@ -410,12 +411,33 @@ p.error {
   .userlist  .info  {
     width: 70%;
   }
-
-
 }
 
-.user:last-child {
-  border-bottom:none;
+ul.awardslist {
+  margin-top:5px;
+}
+
+ul.awardslist li {
+  width: auto;
+  padding: 0 5px 0 10px;
+  margin: 2px;
+  background-color: #C61C6F;
+  color: white;
+  font-weight: normal;
+  border-radius: 20px;
+  font-family: 'Bree Serif', sans-serif;
+}
+
+ul.awardslist li:hover {
+  background-color: #F5974E;
+}
+
+ul.awardslist li .btn-delete {
+  background-color: transparent;
+  background-size: 15px 15px;
+  background-position: center 40%;
+  margin:0;
+  border: none;
 }
 
 nav {

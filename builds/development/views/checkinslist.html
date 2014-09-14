@@ -43,14 +43,28 @@
               <h2>{{checkin.firstname}} {{checkin.lastname}}</h2>
               <span class="date">{{checkin.date | date:"MMM d, yy h:mm a"}}</span>
             </div><!-- info -->
+            <div class="showcheckins" ng-show="checkin.show">
+
               <form class="cf"
-                ng-submit="giveLove(checkin)"
-                ng-show="checkin.show"
+                ng-submit="giveLove(checkin, checkin.giftText)"                
                 novalidate>
                   <input type="text" name="giftText" placeholder="What are you giving them?" autofocus
-                  ng-model="giftText" ng-required="true">
+                  ng-model="checkin.giftText" ng-required="true">
                 <button type="submit" class="btn" ng-disabled="myform.$invalid">+</button>
               </form>
+
+              <p ng-show="checkin.awards.length > 0">Dude</p>
+
+              <ul class="awardslist cf">
+                <li class="cf" ng-repeat="award in checkin.awards">
+                    <div>{{award.name}}
+                      <button class="btn btn-delete tooltip" confirmation-needed="Delete this checkin?" ng-click="deleteAward(checkin.$id, award.$id)"><span>Delete this award</span></button>
+                    </div>
+                </li>
+              </ul>
+
+              
+            </div><!-- showcheckins -->
           </div><!-- checkin -->
       </li>
     </ul><!-- userlist -->
