@@ -22,8 +22,8 @@
     </div> <!-- radio formgroup -->
 
     <div class="buttons cf" ng-show="signedIn()">
-      <button ng-show="limit > 1" class="btn btn-pick" ng-click="pickWinner()">Pick Random</button>
-      <button ng-show="limit == 1" type='button' class="btn btn-reset" ng-click="resetCheckins()">Reset</button>
+      <button ng-hide="recordId" class="btn btn-pick" ng-click="pickWinner()">Pick Random</button>
+      <button ng-show="recordId" type='button' class="btn btn-reset" ng-click="recordId=''">Reset</button>
     </div> <!-- buttons -->
 
   </div> <!-- search -->
@@ -33,7 +33,7 @@
     <p>Here's a list of your latest check-ins.</p>
     
     <ul class="userlist cf">
-      <li ng-class="checkin.userState" ng-repeat="checkin in checkins | orderBy:order:direction | limitTo:limit | filter: query">
+      <li ng-class="checkin.userState" ng-repeat="checkin in checkins | orderBy:order:direction | limitTo:limit | filter:{$id: recordId, $: query}">
           <!-- <img ng-src="images/{{checkin.firstname}}_tn.jpg" alt="Photo of {{checkin.firstname}}  {{checkin.lastname}}"> -->
           <div class="checkin">
             <div class="buttons" ng-show="signedIn()">
@@ -43,7 +43,10 @@
             </div><!-- buttons -->
             <div class="info">
               <h2>{{checkin.firstname}} {{checkin.lastname}}</h2>
-              <span class="date">{{checkin.date | date:"MMM d, yy h:mm a"}}</span>
+              <div class="date">{{checkin.date | date:"MMM d, yy h:mm a"}}</div>
+              <div>{{checkin.$id}}</div>
+
+
             </div><!-- info -->
             <div class="showcheckins" ng-show="checkin.show">
 

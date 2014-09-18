@@ -37,7 +37,4 @@ myApp.controller('MeetingsController',
     $rootScope.currentUser = {};
     $location.path('/login');
   });
-
-
-
 }); //NavController

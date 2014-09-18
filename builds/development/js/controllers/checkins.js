@@ -30,11 +30,9 @@ myApp.controller('CheckInsController',
     } //deleteCheckIn
 
     $scope.pickWinner = function() {
-      var rand = function(){
-         var num = Math.random() - 0.5;
-        return num;
-      };
-      $scope.limit = 1;
+      var whichRecord = Math.round(Math.random() * checkinsList.length);
+      $scope.recordId = checkinsList.$keyAt(whichRecord);
+      console.log($scope.recordId);
     } //pickwinner
 
     $scope.resetCheckins = function() {
