@@ -18,6 +18,6 @@ myApp.controller('RegistrationController',
     }, function(error) {
       $scope.message = error.toString();
     });
-  } //login
+  } //register
 
 }); //RegistrationController
