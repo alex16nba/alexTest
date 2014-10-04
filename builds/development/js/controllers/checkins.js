@@ -1,70 +1,72 @@
-myApp.controller('CheckInsController',
-  function($scope, $rootScope, $firebase, $routeParams, $firebaseSimpleLogin, $location, FIREBASE_URL, Authentication) {
-    $scope.whichmeeting = $routeParams.mId;
-    $scope.whichuser = $routeParams.uId;
-    $scope.order = 'lastname';
-    $scope.direction = true;
-    $scope.limit = 999;
+myApp.controller('CheckInsController', function(
+  $scope, $rootScope, $firebase, $routeParams,
+  $firebaseSimpleLogin, $location, FIREBASE_URL) {
 
-    var checkinsRef = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins');
-    var checkinsList = $firebase(checkinsRef).$asArray();
-    $scope.checkins = checkinsList;
+  $scope.whichmeeting = $routeParams.mId;
+  $scope.whichuser = $routeParams.uId;
+  $scope.order="firstname"; 
+  $scope.direction="";
 
-    $scope.addCheckin = function() {
-      var checkinsObj = $firebase(checkinsRef);
+  var ref = new Firebase(FIREBASE_URL + '/users/' + $scope.whichuser + '/meetings/' + $scope.whichmeeting + '/checkins');
+  var checkinsList = $firebase(ref).$asArray();
+  $scope.checkins = checkinsList;
 
-      var myData = {
-        firstname: $scope.user.firstname,
-        lastname: $scope.user.lastname,
-        email: $scope.user.email,
-        date: Firebase.ServerValue.TIMESTAMP
-      };
-      checkinsObj.$push(myData).then(function() {
-        $location.path('/checkins/' + $scope.whichuser + "/" + $scope.whichmeeting + "/checkinsList" );
-      });
-    } //addCheckIn
+  $scope.addCheckin = function() {
+    var checkinsObj = $firebase(ref);
 
-    $scope.deleteCheckin = function(id) {
-      var record = $firebase(checkinsRef);
-      record.$remove(id);
-    } //deleteCheckIn
+    var myData = {
+      firstname: $scope.user.firstname,
+      lastname: $scope.user.lastname,
+      email: $scope.user.email,
+      date: Firebase.ServerValue.TIMESTAMP
+    };
 
-    $scope.pickWinner = function() {
-      var whichRecord = Math.round(Math.random() * checkinsList.length);
-      $scope.recordId = checkinsList.$keyAt(whichRecord);
-      console.log($scope.recordId);
-    } //pickwinner
+    checkinsObj.$push(myData).then(function() {
+      $location.path('/checkins/' + $scope.whichuser + '/' +
+        $scope.whichmeeting + '/checkinsList');
+    }); //data sent to firebase.
+  } //addCheckin
 
-    $scope.resetCheckins = function() {
-      $scope.order = 'lastname';
-      $scope.direction = true;
-      $scope.limit = 999;
-    } //resetCheckins
+  $scope.deleteCheckin = function(id) {
+    var record = $firebase(ref);
+    record.$remove(id);
+  } //delete Checkin
 
-    $scope.showLove = function(myItem) {
-      myItem.show =!myItem.show;
-      if (myItem.userState=='expanded') {
-        myItem.userState=''; 
-      } else {
-        myItem.userState='expanded'; 
-      }
-    } //showLove
+  $scope.pickRandom = function() {
+    var whichRecord = Math.round(Math.random() * checkinsList.length);
+    $scope.recordId = checkinsList.$keyAt(whichRecord);
+  } //pick random
 
-    $scope.giveLove = function(myItem, myGift) {
-      var ref = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins/' + myItem.$id + '/awards');
-      var checkinsObj = $firebase(ref);
-      var myData = {
-        name: myGift,
-        date: Firebase.ServerValue.TIMESTAMP
-      };
-      checkinsObj.$push(myData);
-    } //showLove
+  $scope.showLove = function(myItem) {
+    myItem.show = !myItem.show;
 
-    $scope.deleteAward = function(checkinId, award) {
-      var ref = new Firebase(FIREBASE_URL + "/users/" + $scope.whichuser + "/meetings/" + $scope.whichmeeting + '/checkins/' + checkinId + '/awards');
-      var record = $firebase(ref);
-      record.$remove(award);
-    } //deleteAward
+    if(myItem.userState == 'expanded') {
+      myItem.userState = '';
+    } else {
+      myItem.userState = 'expanded';
+    }
+  } //showLove
+
+  $scope.giveLove = function(myItem, myGift) {
+    var refLove = new Firebase(FIREBASE_URL + '/users/' + 
+      $scope.whichuser + '/meetings/' + 
+      $scope.whichmeeting + '/checkins/' + myItem.$id + '/awards');
+    var checkinsObj = $firebase(refLove);
+
+    var myData = {
+      name: myGift,
+      date: Firebase.ServerValue.TIMESTAMP
+    };
+    checkinsObj.$push(myData);
+  } //giveLove
+
+  $scope.deleteLove = function(checkinId, award) {
+    var refLove = new Firebase(FIREBASE_URL + '/users/' + 
+      $scope.whichuser + '/meetings/' + 
+      $scope.whichmeeting + '/checkins/' + checkinId + '/awards');
+    var record = $firebase(refLove);
+    record.$remove(award);
+  } //deleteLove
+
 
 }); //CheckInsController
-

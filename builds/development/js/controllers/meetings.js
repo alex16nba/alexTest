@@ -1,40 +1,46 @@
-myApp.controller('MeetingsController',
-  function($scope, $rootScope, $firebase, $firebaseSimpleLogin, $location, FIREBASE_URL, Authentication) {
+myApp.controller('MeetingsController', 
+  function($scope, $rootScope, 
+    $firebase, $firebaseSimpleLogin, FIREBASE_URL) {
 
-  var firebaseRef = new Firebase(FIREBASE_URL);
-  var simpleLogin = $firebaseSimpleLogin(firebaseRef);
+var ref = new Firebase(FIREBASE_URL);
+var simpleLogin = $firebaseSimpleLogin(ref);
 
-  //make sure the user's logged in
-  $rootScope.$on('$firebaseSimpleLogin:login', function (e, authUser) {
-    var meetingsRef = new Firebase(FIREBASE_URL + "/users/" + authUser.uid + "/meetings/");
-    var meetings = $firebase(meetingsRef);
-    $scope.meetings = meetings.$asObject();
-    $scope.checkForMeetings = meetings.$asArray().length !== 0;
-    $scope.user = authUser.uid;
+  simpleLogin.$getCurrentUser().then(function(authUser) {
 
-    $scope.addMeeting = function() {
-      meetings.$push({
-        name: $scope.meetingname,
-        date: Firebase.ServerValue.TIMESTAMP
-      }).then(function() {
-        $scope.meetingname='';
+    if (authUser !== null) {
+      var ref = new Firebase(FIREBASE_URL + '/users/' 
+          + authUser.uid + '/meetings');
+      var meetingsInfo = $firebase(ref);
+      var meetingsObj = $firebase(ref).$asObject();
+      var meetingsArray = $firebase(ref).$asArray();
+
+      meetingsObj.$loaded().then(function(data) {
+        $scope.meetings = meetingsObj;
+      }); // meetings Object Loaded
+
+      meetingsArray.$loaded().then(function(data) {
+        $rootScope.howManyMeetings = meetingsArray.length;
+      }); // meetings Array Loaded
+
+      meetingsArray.$watch(function(event) {
+        $rootScope.howManyMeetings = meetingsArray.length;
       });
-    } //addmeeting
 
-    $scope.deleteMeeting = function(key) {
-      var recordRef = new Firebase(FIREBASE_URL + "/users/" + authUser.uid + "/meetings/");
-      var record = $firebase(recordRef);
-      record.$remove(key);
-    } //addmeeting
+      $scope.addMeeting=function() {
+        meetingsInfo.$push({
+          name: $scope.meetingname,
+          date: Firebase.ServerValue.TIMESTAMP
+        }).then(function() {
+          $scope.meetingname = '';
+        });
+      } //addmeeting
 
-    $scope.checkForMeetings = function() {
-      return meetings.$asArray().length !== 0;
-    } //addmeeting
+      $scope.deleteMeeting=function(key) {
+        meetingsInfo.$remove(key);
+      } //deletemeeting
 
-  }); // users logged in
+    } // user exists
 
- $rootScope.$on('$firebaseSimpleLogin:logout', function (e, authUser) {
-    $rootScope.currentUser = {};
-    $location.path('/login');
-  });
-}); //NavController
+  }); //get current user
+
+}); //MeetingsController

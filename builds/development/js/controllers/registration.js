@@ -1,22 +1,23 @@
-myApp.controller('RegistrationController',
-  function($scope, $location, Authentication) {
-
+myApp.controller('RegistrationController', 
+  function($scope, $firebaseSimpleLogin, $location, Authentication) {
+  
   $scope.login = function() {
     Authentication.login($scope.user)
       .then(function(user) {
-        $location.path('/meetings');
-    }, function (error) {
-      $scope.error = error.toString(); 
+      $location.path('/meetings');
+    }, function(error) {
+      $scope.message = error.toString();
     });
   } //login
 
   $scope.register = function() {
     Authentication.register($scope.user)
-      .then(function(authUser) {
-        Authentication.login($scope.user);
-      }, function (error) {
-      $scope.error = error.toString(); 
-    });//authuser
-  } //register
+      .then(function(user) {
+      Authentication.login($scope.user);
+      $location.path('/meetings');
+    }, function(error) {
+      $scope.message = error.toString();
+    });
+  } //login
 
-}); //AuthController
+}); //RegistrationController
